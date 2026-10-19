@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>PhonePilot · 你的手机，在手边</title>
+    <link rel="stylesheet" href="/static/app.css" />
+    <script defer src="/static/app.js"></script>
+  </head>
+  <body>
+    <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <symbol id="i-phone" viewBox="0 0 24 24">
+          <rect x="6" y="2" width="12" height="20" rx="3" />
+          <path d="M10 5h4m-3 14h2" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5" /></symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24">
+          <path d="M20 7v5h-5M4 17v-5h5M6 7a7 7 0 0 1 12-1l2 3M4 15l2 3a7 7 0 0 0 12-1" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6" /></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24">
+          <path d="M20.8 13A9 9 0 0 1 11 3.2 9 9 0 1 0 20.8 13Z" />
+        </symbol>
+        <symbol id="i-settings" viewBox="0 0 24 24">
+          <path d="M4 7h16M4 17h16" />
+          <circle cx="9" cy="7" r="2.5" />
+          <circle cx="15" cy="17" r="2.5" />
+        </symbol>
+        <symbol id="i-camera" viewBox="0 0 24 24">
+          <path d="m8 5-1.5 3H4a2 2 0 0 0-2 2v9h20v-9a2 2 0 0 0-2-2h-2.5L16 5Z" />
+          <circle cx="12" cy="13" r="3.5" />
+        </symbol>
+        <symbol id="i-record" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8" />
+          <circle cx="12" cy="12" r="3" />
+        </symbol>
+        <symbol id="i-expand" viewBox="0 0 24 24">
+          <path d="M4 9V4h5m6 0h5v5m0 6v5h-5M9 20H4v-5" />
+        </symbol>
+        <symbol id="i-home" viewBox="0 0 24 24">
+          <path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9" />
+        </symbol>
+        <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14" /></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="5" y="10" width="14" height="11" rx="2" />
+          <path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2" />
+        </symbol>
+        <symbol id="i-control" viewBox="0 0 24 24"><path d="m8 3 11 10-6 1-2 6Z" /></symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24">
+          <path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z" />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" /></symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="m12 2 8 4v6c0 5-8 10-8 10S4 17 4 12V6Z" />
+          <path d="m8 12 3 3 5-6" />
+        </symbol>
+        <symbol id="i-return" viewBox="0 0 24 24"><path d="M20 5v9H4m5-5-5 5 5 5" /></symbol>
+        <symbol id="i-grid" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="2" />
+          <rect x="14" y="3" width="7" height="7" rx="2" />
+          <rect x="3" y="14" width="7" height="7" rx="2" />
+          <rect x="14" y="14" width="7" height="7" rx="2" />
+        </symbol>
+      </defs>
+    </svg>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="PhonePilot 首页"
+        ><span class="brand-mark"
+          ><svg class="icon" aria-hidden="true"><use href="#i-phone" /></svg><i></i></span
+        ><span
+          >PhonePilot<span class="brand-divider"></span><small>你的手机，在手边</small></span
+        ></a
+      >
+      <div class="top-right">
+        <span id="mode" class="pill">本机运行</span
+        ><button id="theme-toggle" class="icon-button" aria-label="切换深色外观" title="切换外观">
+          <svg class="icon theme-moon" aria-hidden="true"><use href="#i-moon" /></svg>
+          <svg class="icon theme-sun" aria-hidden="true"><use href="#i-sun" /></svg>
+        </button>
+      </div>
+    </header>
+    <main class="workspace">
+      <div class="connection-bar">
+        <div class="device-summary">
+          <span class="device-avatar"
+            ><svg class="icon" aria-hidden="true"><use href="#i-phone" /></svg
+          ></span>
+          <div>
+            <h1 id="device-name">连接你的 iPhone</h1>
+            <p id="connection-hint">让手机成为工作流的一部分</p>
+          </div>
+        </div>
+        <button
+          id="device-settings"
+          class="device-settings"
+          aria-label="设备设置"
+          aria-haspopup="dialog"
+        >
+          <svg class="icon" aria-hidden="true"><use href="#i-settings" /></svg><span>设备设置</span>
+        </button>
+      </div>
+      <section class="stage" aria-label="iPhone 画面">
+        <div class="stage-top">
+          <div class="stage-heading">
+            <span class="eyebrow">设备画面</span
+            ><span id="status-pill" class="status-pill"
+              ><i></i><span id="status-label">等待连接</span></span
+            >
+          </div>
+          <div class="capture-tools">
+            <button id="record" class="tool-button" disabled>
+              <svg class="icon" aria-hidden="true"><use href="#i-record" /></svg
+              ><span>录制</span></button
+            ><button id="snapshot" class="tool-button" disabled>
+              <svg class="icon" aria-hidden="true"><use href="#i-camera" /></svg
+              ><span>截屏</span></button
+            ><button
+              id="expand-view"
+              class="icon-button"
+              aria-label="放大手机画面"
+              aria-pressed="false"
+              title="专注画面"
+            >
+              <svg class="icon" aria-hidden="true"><use href="#i-expand" /></svg>
+            </button>
+          </div>
+        </div>
+        <div id="phone-area" class="phone-area">
+          <div id="phone" class="phone">
+            <canvas
+              id="screen"
+              width="1"
+              height="1"
+              aria-label="iPhone 画面，可点按和拖动"
+            ></canvas>
+            <div id="empty" class="empty-state">
+              <div class="empty-art">
+                <span class="orbit orbit-one"></span><span class="orbit orbit-two"></span
+                ><svg class="icon" aria-hidden="true"><use href="#i-phone" /></svg
+                ><span class="orbit-dot"></span>
+              </div>
+              <span id="empty-eyebrow" class="empty-eyebrow">HELLO, IPHONE</span>
+              <h2 id="empty-title">下一步，连接你的手机</h2>
+              <p id="empty-description">画面、操作、灵感，<br />从这里连在一起。</p>
+              <button id="setup-open" class="empty-action">
+                连接设备 <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></button
+              ><span id="empty-note" class="empty-note">使用你的真实 iPhone</span>
+            </div>
+            <div id="loading" class="loading hidden">
+              <div class="spinner"></div>
+              <h2>正在连接 iPhone</h2>
+              <p>初次连接需要一点时间</p>
+            </div>
+          </div>
+        </div>
+        <div class="device-toolbar" aria-label="手机快捷控制">
+          <button data-button="home" title="主屏幕" disabled>
+            <svg class="icon" aria-hidden="true"><use href="#i-home" /></svg
+            ><span>主屏幕</span></button
+          ><span class="toolbar-divider"></span
+          ><button data-button="volume-down" title="降低音量" disabled>
+            <svg class="icon" aria-hidden="true"><use href="#i-minus" /></svg
+            ><span>音量</span></button
+          ><button data-button="volume-up" title="提高音量" disabled>
+            <svg class="icon" aria-hidden="true"><use href="#i-plus" /></svg
+            ><span>音量</span></button
+          ><span class="toolbar-divider"></span
+          ><button data-button="lock" title="锁屏" disabled>
+            <svg class="icon" aria-hidden="true"><use href="#i-lock" /></svg><span>锁屏</span>
+          </button>
+        </div>
+        <button id="refresh-picture" class="quiet" disabled>刷新画面</button>
+        <p id="stream-caption" class="stage-caption" aria-live="polite">
+          连接后，按设备画面自动适配
+        </p>
+      </section>
+      <aside class="inspector" aria-label="操作面板">
+        <div class="tabs" role="tablist" aria-label="控制面板">
+          <button
+            id="tab-button-control"
+            role="tab"
+            aria-selected="true"
+            aria-controls="tab-control"
+            data-tab="control"
+          >
+            <svg class="icon" aria-hidden="true"><use href="#i-control" /></svg>操控</button
+          ><button
+            id="tab-button-agent"
+            role="tab"
+            aria-selected="false"
+            aria-controls="tab-agent"
+            tabindex="-1"
+            data-tab="agent"
+          >
+            <svg class="icon" aria-hidden="true"><use href="#i-spark" /></svg>智能体</button
+          ><button
+            id="tab-button-activity"
+            role="tab"
+            aria-selected="false"
+            aria-controls="tab-activity"
+            tabindex="-1"
+            data-tab="activity"
+          >
+            <svg class="icon" aria-hidden="true"><use href="#i-clock" /></svg>记录<span
+              id="event-count"
+              class="event-count hidden"
+              >0</span
+            >
+          </button>
+        </div>
+        <section
+          id="tab-control"
+          class="tab-panel"
+          role="tabpanel"
+          aria-labelledby="tab-button-control"
+        >
+          <div class="panel-heading">
+            <span class="eyebrow">随手掌控</span>
+            <h2>小屏幕，大有可为。</h2>
+            <p>点按、滑动或长按，像平常一样。</p>
+          </div>
+          <div class="control-group">
+            <div class="field-title">
+              <label for="text">发送文字</label><span class="field-tag">支持中文</span>
+            </div>
+            <textarea
+              id="text"
+              placeholder="先在手机上选中输入框，再在这里输入…"
+              maxlength="10000"
+            ></textarea
+            ><button id="send-text" class="primary wide" disabled>
+              发送到手机 <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+            </button>
+            <div class="key-row">
+              <button data-key="backspace" disabled><span>⌫</span>退格</button
+              ><button data-key="enter" disabled>
+                <svg class="icon" aria-hidden="true"><use href="#i-return" /></svg>回车
+              </button>
+            </div>
+            <p class="field-note">中文会通过粘贴输入，替换手机剪贴板。</p>
+          </div>
+          <div class="control-group app-group">
+            <div class="field-title">
+              <label for="apps">打开 App</label
+              ><button id="load-apps" class="quiet" disabled>
+                <svg class="icon" aria-hidden="true"><use href="#i-refresh" /></svg>刷新列表
+              </button>
+            </div>
+            <div class="app-launch">
+              <span class="app-grid"
+                ><svg class="icon" aria-hidden="true"><use href="#i-grid" /></svg></span
+              ><select id="apps" aria-label="选择要打开的 App">
+                <option value="">连接后选择 App</option>
+              </select>
+            </div>
+            <button id="open-app" class="secondary wide" disabled>
+              打开所选 App <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+            </button>
+          </div>
+        </section>
+        <section
+          id="tab-agent"
+          class="tab-panel hidden"
+          role="tabpanel"
+          aria-labelledby="tab-button-agent"
+        >
+          <div class="panel-heading">
+            <span class="eyebrow">从一句话开始</span>
+            <h2>你说，手机来做。</h2>
+            <p>在当前聊天里交代任务，<br />在这里看见每一步。</p>
+          </div>
+          <div class="agent-visual">
+            <span
+              ><svg class="icon" aria-hidden="true"><use href="#i-spark" /></svg></span
+            ><i></i
+            ><span class="accent"
+              ><svg class="icon" aria-hidden="true"><use href="#i-phone" /></svg
+            ></span>
+          </div>
+          <div class="example">
+            <svg class="icon" aria-hidden="true"><use href="#i-spark" /></svg>
+            <p>“看看淘宝待收货包裹，<br />有没有物流异常。”</p>
+          </div>
+          <button id="copy-parcel-task" class="secondary wide">复制查包裹指令</button>
+          <p class="muted">与你共享同一部手机，你可以随时接手。截图会交给你所使用的 AI 处理。</p>
+          <details class="advanced">
+            <summary>智能体接入设置 <span>＋</span></summary>
+            <p class="muted">
+              支持 MCP 的应用可使用截图、点按、滑动与输入工具。添加配置后，重新加载对应连接即可。
+            </p>
+            <button id="copy-config" class="secondary wide">复制 MCP 配置 <span>⧉</span></button>
+            <pre id="config" class="hidden"></pre>
+          </details>
+        </section>
+        <section
+          id="tab-activity"
+          class="tab-panel hidden"
+          role="tabpanel"
+          aria-labelledby="tab-button-activity"
+        >
+          <div class="panel-heading">
+            <span class="eyebrow">每一步，都有迹可循</span>
+            <h2>这次会话</h2>
+            <p>只记录操作类型，<br />不保存截图或输入内容。</p>
+          </div>
+          <div id="events" class="events"></div>
+        </section>
+        <div class="takeover">
+          <div class="takeover-copy">
+            <svg class="icon" aria-hidden="true"><use href="#i-shield" /></svg>
+            <div>
+              <strong id="control-title">控制权，始终在你</strong>
+              <p id="control-note">暂停控制后，仍可查看画面</p>
+            </div>
+          </div>
+          <button id="pause" class="pause-button" disabled>
+            <svg class="icon" aria-hidden="true"><use href="#i-pause" /></svg
+            ><span id="pause-label">暂停控制</span>
+          </button>
+        </div>
+        <footer>
+          <span class="local-dot"></span>本机连接<span class="footer-separator">·</span>PhonePilot
+          Local
+        </footer>
+      </aside>
+    </main>
+    <dialog id="device-dialog" aria-labelledby="device-dialog-title">
+      <div class="dialog-header">
+        <div>
+          <span class="eyebrow">你的设备</span>
+          <h2 id="device-dialog-title">连接 iPhone</h2>
+        </div>
+        <button id="close-device-dialog" class="icon-button" aria-label="关闭设备设置">
+          <svg class="icon" aria-hidden="true"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <section class="device-card">
+        <div class="connection-options" role="group" aria-label="连接方式">
+          <button data-transport="usb" class="secondary" aria-pressed="true">数据线</button>
+          <button data-transport="wifi" class="secondary" aria-pressed="false">无线</button>
+        </div>
+        <p id="transport-hint" class="field-note">通过数据线连接，解锁并信任这台 Mac。</p>
+        <div id="wireless-address" class="hidden">
+          <label for="wireless-host">手机 IP 地址（自动发现不到时填写）</label>
+          <input
+            id="wireless-host"
+            type="text"
+            inputmode="decimal"
+            autocomplete="off"
+            placeholder="例如 192.168.1.20"
+            maxlength="45"
+          />
+          <p class="field-note">
+            在手机“设置 → Wi-Fi → 当前网络详情”查看。仅连接所选的已配对手机。
+          </p>
+        </div>
+        <div class="section-line">
+          <label for="devices">选择设备</label
+          ><button id="refresh" class="icon-button" title="刷新设备列表" aria-label="刷新设备列表">
+            <svg class="icon" aria-hidden="true"><use href="#i-refresh" /></svg>
+          </button>
+        </div>
+        <select id="devices">
+          <option value="">正在查找设备…</option>
+        </select>
+        <div class="device-meta">
+          <span class="dot" id="device-dot"></span
+          ><span id="device-meta">通过数据线连接 iPhone</span>
+        </div>
+        <p id="display-info" class="display-info">连接后自动适配画面比例</p>
+        <button id="connect" class="primary wide" disabled>
+          连接 iPhone <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg></button
+        ><button id="retry" class="primary wide hidden">重新连接原设备</button>
+        <button id="disconnect" class="danger wide hidden">断开连接</button>
+      </section>
+      <p id="wireless-preparation-note" class="field-note">
+        首次无线连接：先插线并选择手机，点击下方按钮。此操作会允许已信任电脑通过 Wi-Fi
+        连接，配对凭据只保存在本机。
+      </p>
+      <button id="prepare-wireless" class="secondary wide" disabled>为这部手机准备无线连接</button>
+      <ol class="steps">
+        <li>
+          <span>1</span>
+          <div>
+            <strong id="step-one-title">连接数据线</strong>
+            <p id="step-one-note">解锁 iPhone，选择信任这台 Mac。</p>
+          </div>
+        </li>
+        <li>
+          <span>2</span>
+          <div>
+            <strong id="step-two-title">完成设备准备</strong>
+            <p id="step-two-note">在 Xcode 设备中心配对，并开启手机的开发者模式。</p>
+          </div>
+        </li>
+        <li>
+          <span>3</span>
+          <div>
+            <strong>连接，开始使用</strong>
+            <p>画面更新后，即可直接操作手机。</p>
+          </div>
+        </li>
+      </ol>
+      <button id="doctor" class="quiet">
+        检查连接条件 <svg class="icon" aria-hidden="true"><use href="#i-arrow" /></svg>
+      </button>
+    </dialog>
+    <dialog id="diagnostics" aria-labelledby="diagnostics-title">
+      <div class="dialog-header">
+        <h2 id="diagnostics-title">连接检查</h2>
+        <button id="close-dialog" class="icon-button" aria-label="关闭连接检查">
+          <svg class="icon" aria-hidden="true"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <div id="doctor-result"></div>
+      <p class="muted">设备就绪并且画面更新后，才可以开始操作。</p>
+    </dialog>
+    <div id="notice" class="notice hidden" role="status"></div>
+  </body>
+</html>

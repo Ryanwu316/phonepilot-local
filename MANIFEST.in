@@ -1,0 +1,12 @@
+include LICENSE THIRD_PARTY.md README.md README.zh-CN.md
+include CONTRIBUTING.md SECURITY.md CHANGELOG.md VERIFICATION.md
+include uv.lock package.json package-lock.json .prettierrc.json
+include .gitignore .gitattributes
+include *.command
+recursive-include .github *.yml *.md
+recursive-include phonepilot/static *.html *.css *.js
+recursive-include skills *.md *.py *.yaml
+recursive-include tools *.py
+recursive-include tests *.py *.cjs
+recursive-include docs *.md *.png
+global-exclude *.py[cod]

@@ -1,0 +1,10 @@
+{
+  "name": "phonepilot-console-dev",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/test_display.cjs",
+    "format": "prettier --write phonepilot/static tests/test_display.cjs",
+    "format:check": "prettier --check phonepilot/static tests/test_display.cjs"
+  },
+  "devDependencies": {"prettier": "3.6.2"}
+}

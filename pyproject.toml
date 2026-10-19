@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phonepilot-local"
+version = "0.1.0"
+description = "A local iPhone console for macOS, with live preview, manual control, and MCP tools"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE", "THIRD_PARTY.md"]
+dependencies = [
+  "pymobiledevice3 @ git+https://github.com/doronz88/pymobiledevice3.git@d1e971b6fbf84a35c7af8195e4d801f3689658c6",
+  "fastapi>=0.115,<1", "uvicorn>=0.30,<1", "httpx>=0.28,<1", "mcp>=1.15,<2", "pillow>=11"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2", "build>=1,<2"]
+
+[project.scripts]
+phonepilot = "phonepilot.server:main"
+phonepilot-mcp = "phonepilot.mcp_server:main"
+
+[tool.setuptools.package-data]
+phonepilot = ["static/*"]
+
+[tool.setuptools.packages.find]
+include = ["phonepilot*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

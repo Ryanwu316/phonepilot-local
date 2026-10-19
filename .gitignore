@@ -1,0 +1,30 @@
+# Local environments and build output
+.venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.DS_Store
+
+# Local device sessions, credentials and generated configuration
+var*/
+runtime.json
+server.lock
+launcher.lock
+codex-mcp.toml
+.env
+.env.*
+*.pem
+*.key
+.codex/
+.agents/
+
+# Private captures and work files; public previews belong in docs/images/
+/*.png
+/*.webm
+/*.mp4
+work/
